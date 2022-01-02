@@ -19,10 +19,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['middleware' => 'auth'], function(){
-    
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
     Route::get('/receitas',  [App\Http\Controllers\ReceitaController::class, 'index']);
     Route::get('/receitas/new',  [App\Http\Controllers\ReceitaController::class, 'new']);
     Route::post('/receitas/add',  [App\Http\Controllers\ReceitaController::class, 'add']);
