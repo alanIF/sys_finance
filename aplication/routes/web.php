@@ -12,13 +12,14 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['middleware' => 'web'], function(){
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
+    
+    Auth::routes();
+    
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    
 });
-
-Auth::routes();
-
 
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -37,5 +38,6 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/despesas/{id}/edit',  [App\Http\Controllers\DespesaController::class, 'edit']);
     Route::delete('/despesas/delete/{id}',  [App\Http\Controllers\DespesaController::class, 'delete']);
     
+    Route::get('/balanco',  [App\Http\Controllers\BalancoController::class, 'index']);
 
 });
