@@ -1,42 +1,63 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Despesa;
+use Illuminate\Support\Facades\Auth;
+
+use Redirect;
+
 
 class DespesaController extends Controller
 {
     public function index(){
         $user = Auth::id();
 
-        $sql = 'Select * from receita r where r.user_id='.$user.'';
-        $receitas = \DB::select($sql);
+        $sql = 'Select * from despesa d where d.user_id='.$user.'';
+        $despesas = \DB::select($sql);
         
-        return view('receitas.index', ['receitas' => $receitas]);
+        return view('despesas.index', ['despesas' =>  $despesas]);
     }
     // form de cadastrar
     public function new(){
-        return view('receitas.form');
+        return view('despesas.form');
     }
     public function add(Request $request){
-        $receita = new Receita();
-        $receita= $receita->create($request->all());
-        return Redirect::to('/receitas');
+        $despesa = new Despesa();
+        $user = Auth::id();
+
+        $despesa->descricao=$request->descricao;
+        $despesa->valor =$request->valor;
+        $data_convetida= date('d/m/Y', strtotime($request->data_despesa));
+        $despesa->data_despesa =$data_convetida;
+        $despesa->user_id= $user;
+        $despesa->save();
+
+       
+        return Redirect::to('/despesas');
     }
     public function update($id ,Request $request){
-        $receita= Receita::findOrFail($id);
-        $receita->update($request->all());
-        \Session::flash('msg_update', 'Receita Atualizado com sucesso!');
-        return Redirect::to('/receita');
+        $despesa= Despesa::findOrFail($id);
+        $user = Auth::id();
+
+        $despesa->descricao=$request->descricao;
+        $despesa->valor =$request->valor;
+        $data_convetida= date('d/m/Y', strtotime($request->data_despesa));
+        $despesa->data_receita =$data_convetida;
+        $despesa->user_id= $user;
+        $despesa->save();
+
+        \Session::flash('msg_update', 'Despesa Atualizada com sucesso!');
+        return Redirect::to('/despesas');
     }
     public function edit($id){
-        $receita= Receita::findOrFail($id);
-        return view('receitas.form', ['receita'=> $receita]);
+        $despesa= Despesa::findOrFail($id);
+        return view('despesas.form', ['despesa'=> $despesa]);
     }
     public function delete($id){
-        $receita= Receita::findOrFail($id);
-        $receita->delete();
-        return Redirect::to('/receitas');
+        $despesa= Despesa::findOrFail($id);
+        $despesa->delete();
+        return Redirect::to('/despesas');
     }
     
 }

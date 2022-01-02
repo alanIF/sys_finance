@@ -4,8 +4,8 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">Receitas</div>
+            <div class="card danger">
+                <div class="card-header">Despesas</div>
 
                 <div class="card-body">
                    
@@ -27,24 +27,24 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach($receitas as $r)
+                        @foreach($despesas as $d)
                         <tr>
 
-                            <td >{{$r->id}}</td>
-                            <td>{{$r->descricao}}</td>
-                            <td>{{$r->data_receita}}</td>
+                            <td >{{$d->id}}</td>
+                            <td>{{$d->descricao}}</td>
+                            <td>{{$d->data_despesa}}</td>
 
-                            <td>{{$r->valor}}</td>
+                            <td>{{$d->valor}}</td>
 
 
-                            <td><a class="btn btn-warning " href="receitas/{{$r->id}}/edit"><i class="fa fa-edit" ></i></a> </td>
-                            <td>   <form action="receitas/delete/{{$r->id}}" method="post"> @csrf @method('delete')<button class="btn btn-danger"><i class="fa fa-trash" ></i></button></form></td>
+                            <td><a class="btn btn-warning " href="despesas/{{$d->id}}/edit"><i class="fa fa-edit" ></i></a> </td>
+                            <td>   <form action="despesas/delete/{{$d->id}}" method="post"> @csrf @method('delete')<button class="btn btn-danger"><i class="fa fa-trash" ></i></button></form></td>
                             </tr>
                             @endforeach
                         </tbody>
                         <tfoot>
                             <tr >
-                                <td colspan='6'><a class="btn btn-primary " href="{{url('receitas/new')}}"><i class="fa fa-plus" ></i></a></td>
+                                <td colspan='6'><a class="btn btn-primary " href="{{url('despesas/new')}}"><i class="fa fa-plus" ></i></a></td>
 
                             </tr>
                         </tfoot>
