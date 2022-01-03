@@ -28,8 +28,7 @@ class DespesaController extends Controller
 
         $despesa->descricao=$request->descricao;
         $despesa->valor =$request->valor;
-        $data_convetida= date('d/m/Y', strtotime($request->data_despesa));
-        $despesa->data_despesa =$data_convetida;
+        $despesa->data_despesa =$request->data_despesa;
         $despesa->user_id= $user;
         $despesa->save();
 
@@ -42,8 +41,7 @@ class DespesaController extends Controller
 
         $despesa->descricao=$request->descricao;
         $despesa->valor =$request->valor;
-        $data_convetida= date('d/m/Y', strtotime($request->data_despesa));
-        $despesa->data_receita =$data_convetida;
+        $despesa->data_despesa =$request->data_despesa;
         $despesa->user_id= $user;
         $despesa->save();
 

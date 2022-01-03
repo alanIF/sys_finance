@@ -17,7 +17,7 @@ class CreateReceitasTable extends Migration
             $table->id();
             $table->text("descricao");
             $table->double("valor");
-            $table->text("data_receita");
+            $table->date("data_receita");
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
 

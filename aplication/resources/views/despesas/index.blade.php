@@ -32,8 +32,10 @@
 
                             <td >{{$d->id}}</td>
                             <td>{{$d->descricao}}</td>
-                            <td>{{$d->data_despesa}}</td>
-
+                            <?php
+                                $data = date('d/m/Y', strtotime($d->data_despesa));
+                                echo "<td>".$data."</td>";
+                            ?>
                             <td>{{$d->valor}}</td>
 
 

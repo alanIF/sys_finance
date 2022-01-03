@@ -27,8 +27,7 @@ class ReceitaController extends Controller
 
         $receita->descricao=$request->descricao;
         $receita->valor =$request->valor;
-        $data_convetida= date('d/m/Y', strtotime($request->data_receita));
-        $receita->data_receita =$data_convetida;
+        $receita->data_receita =$request->data_receita;
         $receita->user_id= $user;
         $receita->save();
 
@@ -41,8 +40,7 @@ class ReceitaController extends Controller
 
         $receita->descricao=$request->descricao;
         $receita->valor =$request->valor;
-        $data_convetida= date('d/m/Y', strtotime($request->data_receita));
-        $receita->data_receita =$data_convetida;
+        $receita->data_receita =$request->data_receita;
         $receita->user_id= $user;
         $receita->save();
 

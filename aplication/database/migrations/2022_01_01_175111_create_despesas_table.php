@@ -17,7 +17,7 @@ class CreateDespesasTable extends Migration
             $table->id();
             $table->text("descricao");
             $table->double("valor");
-            $table->text("data_despesa");
+            $table->date("data_despesa");
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
 

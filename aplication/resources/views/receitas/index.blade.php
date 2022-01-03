@@ -32,7 +32,10 @@
 
                             <td >{{$r->id}}</td>
                             <td>{{$r->descricao}}</td>
-                            <td>{{$r->data_receita}}</td>
+                            <?php
+                                $data = date('d/m/Y', strtotime($r->data_receita));
+                                echo "<td>".$data."</td>";
+                            ?>
 
                             <td>{{$r->valor}}</td>
 

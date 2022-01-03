@@ -29,7 +29,10 @@ class BalancoController extends Controller
         // pegando os meses
         for($i=0; $i<count($receitas);$i++){
             $balanco_m= array();
-            $mes = explode('/',$receitas[$i]->data_receita,2);
+         
+            $data_receita_convertida = date('d/m/Y', strtotime($receitas[$i]->data_receita));
+      
+            $mes = explode('/',$data_receita_convertida,2);
             if(strcmp($mes[1], $mes_atual)!=0){
                 $mes_atual=$mes[1];
 
@@ -39,35 +42,35 @@ class BalancoController extends Controller
 
                 for($j=0; $j<count($receitas);$j++){
                     //
-                    $mes_j = explode('/',$receitas[$j]->data_receita,2);
+                    $data_receita_convertida2= date('d/m/Y', strtotime($receitas[$j]->data_receita));
+                    $mes_j = explode('/',$data_receita_convertida2,2);
                     if(strcmp($balanco_m['data'], $mes_j[1])==0){
                         $balanco_m['total_receita']= $receitas[$j]->valor + $balanco_m['total_receita'];
                     }
 
                 }
 
-
                 for($j=0; $j<count($despesas);$j++){
                     //
-                    $mes_j = explode('/',$despesas[$j]->data_despesa,2);
+                    $data_receita_convertida3= date('d/m/Y', strtotime($despesas[$j]->data_despesa));
+
+                    $mes_j = explode('/',$data_receita_convertida3,2);
                     if(strcmp($balanco_m['data'], $mes_j[1])==0){
                         $balanco_m['total_despesa']= $despesas[$j]->valor + $balanco_m['total_despesa'];
                     }
 
 
                 }
+
                 $balanco_t[$i]['data']= $balanco_m['data'];
                 $balanco_t[$i]['despesas']= $balanco_m['total_despesa'];
 
                 $balanco_t[$i]['receitas']= $balanco_m['total_receita'];
                 $balanco_t[$i]['saldo']= $balanco_m['total_receita']- $balanco_m['total_despesa'];
-              
 
             }
         }
         
-
-
 
 
         return view('balanco.index', ['balanco' => $balanco_t]);
