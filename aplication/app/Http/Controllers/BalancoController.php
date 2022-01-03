@@ -15,75 +15,61 @@ class BalancoController extends Controller
 
         $sql = 'Select * from receita r where r.user_id='.$user.'';
         $receitas = \DB::select($sql);
-        $receitas_t=array();
+        $sql2 = 'Select * from despesa d where d.user_id='.$user.'';
+        $despesas = \DB::select($sql2);
+        $balanco = array();
 
-        $total_m=0;
+        $receitas_t=array();
+        $despesas_t= array();
+
         $meses=array();
         $mes_atual="00/2022";
-        
+        $balanco_t= array();
+
         // pegando os meses
         for($i=0; $i<count($receitas);$i++){
-
+            $balanco_m= array();
             $mes = explode('/',$receitas[$i]->data_receita,2);
-            $receitas_m= array();
             if(strcmp($mes[1], $mes_atual)!=0){
                 $mes_atual=$mes[1];
-                $receitas_m['data']=$mes[1];
 
-                $receitas_m['total_receita']=0;
+                $balanco_m['data']=$mes[1];
+                $balanco_m['total_receita']=0;
+                $balanco_m['total_despesa']=0;
 
                 for($j=0; $j<count($receitas);$j++){
                     //
                     $mes_j = explode('/',$receitas[$j]->data_receita,2);
-                    if(strcmp($receitas_m['data'], $mes_j[1])==0){
-                        $receitas_m['total_receita']= $receitas[$j]->valor + $receitas_m['total_receita'];
+                    if(strcmp($balanco_m['data'], $mes_j[1])==0){
+                        $balanco_m['total_receita']= $receitas[$j]->valor + $balanco_m['total_receita'];
                     }
+
                 }
 
-                array_push($receitas_t,$receitas_m);
-            }
-
-        }
-
-
-        $sql = 'Select * from despesa d where d.user_id='.$user.'';
-        $despesas = \DB::select($sql);
-        $despesas_t=array();
-
-        $total_m=0;
-        $meses=array();
-        $mes_atual="00/2022";
-        
-        // pegando os meses
-        for($i=0; $i<count($despesas);$i++){
-
-            $mes = explode('/',$despesas[$i]->data_despesa,2);
-            $despesas_m= array();
-            if(strcmp($mes[1], $mes_atual)!=0){
-                $mes_atual=$mes[1];
-                $despesas_m['data']=$mes[1];
-
-                $despesas_m['total_receita']=0;
 
                 for($j=0; $j<count($despesas);$j++){
                     //
                     $mes_j = explode('/',$despesas[$j]->data_despesa,2);
-                    if(strcmp($despesas_m['data'], $mes_j[1])==0){
-                        $despesas_m['total_receita']= $despesas[$j]->valor + $despesas_m['total_receita'];
+                    if(strcmp($balanco_m['data'], $mes_j[1])==0){
+                        $balanco_m['total_despesa']= $despesas[$j]->valor + $balanco_m['total_despesa'];
                     }
+
+
                 }
+                $balanco_t[$i]['data']= $balanco_m['data'];
+                $balanco_t[$i]['despesas']= $balanco_m['total_despesa'];
 
-                array_push($despesas_t,$despesas_m);
+                $balanco_t[$i]['receitas']= $balanco_m['total_receita'];
+                $balanco_t[$i]['saldo']= $balanco_m['total_receita']- $balanco_m['total_despesa'];
+              
+
             }
-
         }
+        
 
 
 
 
-        $balanco = array();
-        $balanco['receitas']= $receitas_t;
-        $balanco['despesas']= $despesas_t;
-        return view('balanco.index', ['balanco' => $balanco]);
+        return view('balanco.index', ['balanco' => $balanco_t]);
     }
 }

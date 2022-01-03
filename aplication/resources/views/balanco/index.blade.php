@@ -14,18 +14,27 @@
                         <thead>
                             <tr>
                             <th></th>
-
-                            @for ($i = 0; $i < count($balanco['receitas']); $i++)
-                                <th>{{$balanco['receitas'][$i]['data']}}</th>
-                            @endfor   
+                            @for($i = 0; $i < count($balanco); $i++)
+                                <th>{{$balanco[$i]['data']}}</th>
+                            @endfor
+                          
 
                             </tr>
                         </thead>
                         <tbody>
                                                    
-                        <tr>
-
-                            
+                        <tr>  
+                            <th>Receitas</th>  
+                            @for ($i = 0; $i < count($balanco); $i++)
+                                <th>{{$balanco[$i]['receitas']}}</th>
+                            @endfor 
+                        </tr>
+                        <tr>  
+                            <th>Despesas</th>  
+                            @for ($i = 0; $i < count($balanco); $i++)
+                            <th>{{$balanco[$i]['despesas']}}</th>
+                            @endfor 
+                        </tr>   
                         </tfoot>
                         </table>
                 </div>
