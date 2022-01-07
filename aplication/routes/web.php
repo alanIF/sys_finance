@@ -38,6 +38,16 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/despesas/{id}/edit',  [App\Http\Controllers\DespesaController::class, 'edit']);
     Route::delete('/despesas/delete/{id}',  [App\Http\Controllers\DespesaController::class, 'delete']);
     
+
+    Route::get('/operacao',  [App\Http\Controllers\OperacaoController::class, 'index']);
+    Route::get('/operacao/new',  [App\Http\Controllers\OperacaoController::class, 'new']);
+    Route::post('/operacao/add',  [App\Http\Controllers\OperacaoController::class, 'add']);
+    Route::post('/operacao/update/{id}',  [App\Http\Controllers\OperacaoController::class, 'update']);
+    Route::get('/operacao/{id}/edit',  [App\Http\Controllers\OperacaoController::class, 'edit']);
+    Route::delete('/operacao/delete/{id}',  [App\Http\Controllers\OperacaoController::class, 'delete']);
+
+    Route::get('/conta',  [App\Http\Controllers\ContaController::class, 'index']);
+
     Route::get('/balanco',  [App\Http\Controllers\BalancoController::class, 'index']);
 
 });
