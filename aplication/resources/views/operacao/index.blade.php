@@ -18,6 +18,7 @@
 
                             <th scope="col">valor</th>
                             <th scope="col">tipo</th>
+                            <th scope="col">data</th>
 
 
                             <th colspan='2'>Ações</th>
@@ -32,14 +33,15 @@
 
                             <td >{{$o->id}}</td>
                             <td>{{$o->descricao}}</td>
-                            <td>{{$o->updated_at}}</td>
-
+                            <td>{{$o->valor}}</td>
                             @if($o->tipo==1)
                                 <td>Depósito</td>
                             @else
                                 <td>Saque</td>
                             @endif
-                            <td>{{$o->valor}}</td>
+                            <td>{{(new DateTime($o->updated_at))->format('d/m/Y H:i:s')}}</td>
+
+                            
 
 
                             <td><a class="btn btn-warning " href="operacao/{{$o->id}}/edit"><i class="fa fa-edit" ></i></a> </td>
@@ -49,7 +51,7 @@
                         </tbody>
                         <tfoot>
                             <tr >
-                                <td colspan='6'><a class="btn btn-primary " href="{{url('operacao/new')}}"><i class="fa fa-plus" ></i></a></td>
+                                <td colspan='7'><a class="btn btn-primary " href="{{url('operacao/new')}}"><i class="fa fa-plus" ></i></a></td>
 
                             </tr>
                         </tfoot>

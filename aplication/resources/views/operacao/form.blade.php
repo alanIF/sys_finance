@@ -25,7 +25,13 @@
             <div class="mb-3">
                 <input type="number" class="form-control" name="valor" placeholder="Valor" value="{{$operacao->valor}}" required>
             </div>
-           
+            <div class="mb-3">
+                <select class="form-control" name="tipo" id="sel1">
+                    <option value="1">Depósito</option>
+                    <option value="2">Saque</option>
+                    
+                </select>
+            </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
             <a class="btn btn-warning " href="{{url('operacao/')}}">Voltar</a>
@@ -46,17 +52,15 @@
                 <input type="number" class="form-control" name="valor" placeholder="Valor" required>
             </div>
             <div class="mb-3">
-            <label for="sel1">Select list:</label>
-  <select class="form-control" id="sel1">
-    <option>1</option>
-    <option>2</option>
-    <option>3</option>
-    <option>4</option>
-  </select>
+                <select class="form-control" name="tipo" id="sel1">
+                    <option value="1">Depósito</option>
+                    <option value="2">Saque</option>
+                    
+                </select>
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
-            <a class="btn btn-warning " href="{{url('receitas/')}}">Voltar</a>
+            <a class="btn btn-warning " href="{{url('operacao/')}}">Voltar</a>
 
             
             </form>

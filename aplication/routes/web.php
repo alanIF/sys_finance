@@ -46,7 +46,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/operacao/{id}/edit',  [App\Http\Controllers\OperacaoController::class, 'edit']);
     Route::delete('/operacao/delete/{id}',  [App\Http\Controllers\OperacaoController::class, 'delete']);
 
-    Route::get('/conta',  [App\Http\Controllers\ContaController::class, 'index']);
+    Route::get('/banco',  [App\Http\Controllers\BancoController::class, 'index']);
 
     Route::get('/balanco',  [App\Http\Controllers\BalancoController::class, 'index']);
 
