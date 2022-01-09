@@ -17,12 +17,22 @@ class BancoController extends Controller
         $total_saques=0;
         $total_depositos=0;
         foreach($saques as $s){
-            $total_saques=$s->saques;
+            if($s->saques!=null){
+                $total_saques=$s->saques;
+
+            }
         }
         foreach($depositos as $d){
-            $total_depositos=$d->depositos;
+            if($d->depositos!=null){
+                $total_depositos=$d->depositos;
+
+            }
         }
-        return dd($total_depositos);
-        return view('banco.index', ['operacoes' => $operacoes]);
+        $saldo= $total_depositos-$total_saques;
+        $dados=array();
+        $dados['saldo']=$saldo;
+        $dados['saques']=$total_saques;
+        $dados['depositos']=$total_depositos;
+        return view('banco.index', ['dados' => $dados]);
     }
 }
